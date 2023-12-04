@@ -5,16 +5,17 @@
     try
     {
         string[] lines = File.ReadAllLines(filePath);
-
-        int sum = 0;
-        foreach (string line in lines)
+        static int func (string line)
         {
             char firstNumeric = line.FirstOrDefault(char.IsDigit);
             char lastNumeric = line.LastOrDefault(char.IsDigit);
             string twoDigit = firstNumeric.ToString() + lastNumeric;
-            sum += Convert.ToInt32(twoDigit);
+            return Convert.ToInt32(twoDigit);
         }
-        return sum;
+        return lines.Select(func).Sum();
+
+        // second solution
+        // return lines.Select((line) => Convert.ToInt32(line.FirstOrDefault(char.IsDigit).ToString() + line.LastOrDefault(char.IsDigit))).Sum();
     }
     catch (Exception ex)
     {
